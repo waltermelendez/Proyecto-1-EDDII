@@ -4,6 +4,7 @@
  */
 package clases.monticulo;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -13,40 +14,35 @@ import java.util.Arrays;
 public class Monticulo {
 
     // Variables de la clase Monticulo
-    private int[] monticulo;
+    private ArrayList<Integer> monticulo;
     private int numElementos;
-    private int maxElementos;
+    
     // Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro
     // el numero de elementos y el numero maximo
 
-    public Monticulo(int num, int max) {
-        monticulo = new int[max];
-        numElementos = num;
-        maxElementos = max;
-    }
+   
 
     // Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro un vector
-    public Monticulo(int[] vector, int max) {
-        monticulo = new int[max];
-        numElementos = vector.length - 1;
-        maxElementos = max;
-        monticulo = Arrays.copyOf(vector, numElementos + 1);
-        for (int i = 2; i < monticulo.length; i++) {
-            this.flotar(i);
+    public Monticulo(ArrayList<Integer> vector) {
+        monticulo = new ArrayList<>();
+        monticulo.add(0);
+        for (int i = 0; i < vector.size(); i++) {
+            monticulo.add(i);
+            
         }
+        for (int i = 2; i < vector.size(); i++) {
+            flotar(i);
+        }
+        numElementos=vector.size();
     }
 
     public boolean EmptyHeap() {
-        if (numElementos == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return monticulo.isEmpty();
     }
 
     public void flotar(int elemento) {
 
-        while (elemento > 1 && monticulo[elemento / 2] < monticulo[elemento]) {
+        while (elemento > 1 && monticulo.get(elemento / 2) < monticulo.get(elemento)) {
             mSwitch(elemento, elemento / 2); // Metodo que intercambiar elementos de un vector
             elemento = elemento / 2;
         }
@@ -62,11 +58,11 @@ public class Monticulo {
             hijod = (2 * elemento) + 1;
             padre = elemento;
 
-            if (hijod <= this.numElementos && monticulo[hijod] > monticulo[elemento]) {
+            if (hijod <= this.numElementos && monticulo.get(hijod) > monticulo.get(elemento)) {
                 elemento = hijod;
             }
 
-            if (hijoi <= this.numElementos && monticulo[hijoi] > monticulo[elemento]) {
+            if (hijoi <= this.numElementos && monticulo.get(hijoi) > monticulo.get(elemento)) {
                 elemento = hijoi;
             }
 
@@ -76,21 +72,17 @@ public class Monticulo {
     }
 
     public void insert(int elemento) {
-        if (this.numElementos == this.maxElementos) {
-            System.out.println("El monticulo esta lleno y no podemos añadir nuevos elementos");
-        } else {
-            this.numElementos++;
-            monticulo[this.numElementos] = elemento;
-            flotar(this.numElementos);
-        }
+        monticulo.add(elemento);
+        numElementos++;
+        flotar(numElementos);
     }
 
     public int first() {
         if (this.EmptyHeap()) {
-            System.out.println("No hay elementos en el monticulo.");
-            return Integer.MAX_VALUE;
+            System.out.println("El monticulo esta vacio");
+            return 0;
         } else {
-            return monticulo[1];
+            return monticulo.get(1);
         }
     }
 
@@ -99,22 +91,22 @@ public class Monticulo {
         int element;
 
         if (this.numElementos != 0) {
-            element = monticulo[1];
-            monticulo[1] = monticulo[this.numElementos];
+            element = monticulo.get(1);
+            monticulo.set(1,monticulo.get(numElementos));
             this.numElementos--;
             this.hundir(1);
             return element;
         }
 
-        return Integer.MAX_VALUE;
+        return 0;
     }
 
     private void mSwitch(int element1, int element2) {
-        int auxiliar;
+        int auxiliar = monticulo.get(element1);
+        monticulo.set(element1, monticulo.get(element2));
+        monticulo.set(element2, auxiliar);
 
-        auxiliar = monticulo[element1];
-        monticulo[element1] = monticulo[element2];
-        monticulo[element2] = auxiliar;
+       
 
     }
 

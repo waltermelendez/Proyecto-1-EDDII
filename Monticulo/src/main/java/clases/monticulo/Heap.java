@@ -4,6 +4,8 @@
 
 package clases.monticulo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author walter
@@ -11,7 +13,8 @@ package clases.monticulo;
 public class Heap {
 
     public static void main(String[] args) {
-        Monticulo nuevo = new Monticulo(3,9);
+        ArrayList<Integer> n = new ArrayList<>();
+        Monticulo nuevo = new Monticulo( n);
         
         nuevo.insert(2);
         nuevo.insert(4);
