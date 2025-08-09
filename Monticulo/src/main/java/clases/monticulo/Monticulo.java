@@ -5,16 +5,16 @@
 package clases.monticulo;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  *
  * @author walter
+ * @param <T>
  */
-public class Monticulo {
+public class Monticulo <T extends Comparable<T>> {
 
     // Variables de la clase Monticulo
-    private ArrayList<Integer> monticulo;
+    private final ArrayList<T> monticulo;
     private int numElementos;
     
     // Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro
@@ -23,11 +23,11 @@ public class Monticulo {
    
 
     // Constructor de la clase Monticulo que genera un objeto de tipo Monticulo pasando por parametro un vector
-    public Monticulo(ArrayList<Integer> vector) {
+    public Monticulo(ArrayList<T> vector) {
         monticulo = new ArrayList<>();
-        monticulo.add(0);
+        //monticulo.add(valor);
         for (int i = 0; i < vector.size(); i++) {
-            monticulo.add(i);
+            monticulo.add(vector.get(i));
             
         }
         for (int i = 2; i < vector.size(); i++) {
@@ -40,15 +40,15 @@ public class Monticulo {
         return monticulo.isEmpty();
     }
 
-    public void flotar(int elemento) {
+    private  void flotar(int elemento) {
 
-        while (elemento > 1 && monticulo.get(elemento / 2) < monticulo.get(elemento)) {
+        while (elemento > 1 && monticulo.get(elemento/2).compareTo(monticulo.get(elemento))<0) {
             mSwitch(elemento, elemento / 2); // Metodo que intercambiar elementos de un vector
             elemento = elemento / 2;
         }
     }
 
-    public void hundir(int elemento) {
+    private  void hundir(int elemento) {
         int hijoi;
         int hijod;
         int padre;
@@ -58,11 +58,11 @@ public class Monticulo {
             hijod = (2 * elemento) + 1;
             padre = elemento;
 
-            if (hijod <= this.numElementos && monticulo.get(hijod) > monticulo.get(elemento)) {
+            if (hijod <= this.numElementos && monticulo.get(hijod).compareTo(monticulo.get(elemento))>0) {
                 elemento = hijod;
             }
 
-            if (hijoi <= this.numElementos && monticulo.get(hijoi) > monticulo.get(elemento)) {
+            if (hijoi <= this.numElementos && monticulo.get(hijoi).compareTo(monticulo.get(elemento))>0) {
                 elemento = hijoi;
             }
 
@@ -71,24 +71,24 @@ public class Monticulo {
         } while (padre == elemento);
     }
 
-    public void insert(int elemento) {
+    public void insert(T elemento) {
         monticulo.add(elemento);
         numElementos++;
         flotar(numElementos);
     }
 
-    public int first() {
+    public T first() {
         if (this.EmptyHeap()) {
             System.out.println("El monticulo esta vacio");
-            return 0;
+            return null;
         } else {
             return monticulo.get(1);
         }
     }
 
-    public int peek() {
+    public T peek() {
 
-        int element;
+        T element;
 
         if (this.numElementos != 0) {
             element = monticulo.get(1);
@@ -98,16 +98,24 @@ public class Monticulo {
             return element;
         }
 
-        return 0;
+        return null;
     }
 
     private void mSwitch(int element1, int element2) {
-        int auxiliar = monticulo.get(element1);
+        T auxiliar = monticulo.get(element1);
         monticulo.set(element1, monticulo.get(element2));
         monticulo.set(element2, auxiliar);
 
        
 
+    }
+    
+    public void Imprimir(){
+        System.out.println("Monticulo");
+        for (int i = 0; i < monticulo.size(); i++) {
+            System.out.println(monticulo.get(i)+",");
+        }
+        System.out.println();
     }
 
 }
