@@ -1,0 +1,38 @@
+{
+  "raiz": 0,
+  "nodos": [{
+    "claves": [
+      {
+        "Segundo_nombre": "Francsco",
+        "Segundo_apellido": "Aguar",
+        "ID": 1246,
+        "Correo_electronico": "meenz",
+        "Fecha_nacimiento": "10/2/2014",
+        "Primer_apellido": "Mlendez",
+        "Primer_nombre": "alter"
+      },
+      {
+        "Segundo_nombre": "Francisco",
+        "Segundo_apellido": "Aguilar",
+        "ID": 1546,
+        "Correo_electronico": "meldenz",
+        "Fecha_nacimiento": "20/2/2014",
+        "Primer_apellido": "Melendez",
+        "Primer_nombre": "Walter"
+      },
+      {
+        "Segundo_nombre": "Franci",
+        "Segundo_apellido": "Alar",
+        "ID": 7546,
+        "Correo_electronico": "meld",
+        "Fecha_nacimiento": "20/2/2010",
+        "Primer_apellido": "Melend",
+        "Primer_nombre": "Walr"
+      }
+    ],
+    "id": 0,
+    "esHoja": true
+  }],
+  "tipoClave": "Integer",
+  "orden": 3
+}
