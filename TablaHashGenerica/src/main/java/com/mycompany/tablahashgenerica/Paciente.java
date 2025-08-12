@@ -40,12 +40,27 @@ public class Paciente implements Comparable<Paciente> {
         return Integer.compare(this.ID, o.ID);
     }
 
-    public String tochain() {
-        int id = this.ID;
-        String P = this.Primer_nombre.substring(1, this.Primer_nombre.length() - 2);
-        String S = this.Primer_apellido.substring(1, this.Primer_nombre.length() - 3);
-       String C = this.Correo_electronico.substring(4,this.Correo_electronico.length()-5);
-        return P.concat(S).concat(C);
+    private  String tochain() {
+       
+        String First = this.Primer_nombre.substring(1, this.Primer_nombre.length() - 2);
+        String Second = this.Primer_apellido.substring(1, this.Primer_nombre.length() - 3);
+        String Third = this.Correo_electronico.substring(2, this.Correo_electronico.length() - 2);
+        return First.concat(Second).concat(Third);
+    }
+
+    
+    public long hashString() {
+        int hash=0;
+        int id=this.ID/this.Prioridad;
+        int P_Nombre= this.Primer_nombre.length();
+        int S_Apellido =this.Segundo_apellido.length();
+        int fecha =Integer.parseInt(this.Fecha_nacimiento.substring(5, this.Fecha_nacimiento.length()));
+        String Chain = tochain();
+        for (int i = 0; i < Chain.length(); i++) {
+            char k= Chain.charAt(i);
+            hash= (id *P_Nombre)*((int)k )+hash;
+        }
+        return ((hash*S_Apellido)+(fecha*id))+P_Nombre;
     }
 
 }

@@ -17,7 +17,6 @@ public class TablaHashGenerica {
         Paciente n = new Paciente(1546, 22,"Walter", "Francisco", "Melendez", "Aguilar", "20/2/2014", "meldenz");
         Paciente a = new Paciente(1246, 3,"Francisco", "Francsco", "Mlendez", "Aguar", "10/2/2014", "meenz");
         Paciente z = new Paciente(7546, 4,"Vanessa", "Franci", "Melend", "Alar", "20/2/2010", "meld");
-        System.out.println(z.tochain());
         
        // System.out.println(z.ToHash());
        // HashUniversal nuevo = new HashUniversal(n.getID(),);
