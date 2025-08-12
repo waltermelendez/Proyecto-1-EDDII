@@ -5,10 +5,9 @@ Partes del proyecto fundamental:
 
 1. Almacenar los pacientes en un arbol B+, por medio del ID como clave. LISTO
 
+2. Hacer un moticulo en donde se aguardara su prioridad, este debe de ser un "Heap maximo". Posible solucion, hacer el heap de tipo obejto que contenga tanto el ID como la edad del paciente LISTO
 
-2. Hacer un moticulo en donde se aguardara su prioridad, este debe de ser un "Heap maximo". Posible solucion, hacer el heap de tipo obejto que contenga tanto el ID como la edad del paciente
-
-3. El programa recibe archivos de entrada y salida, el tipo de formato es ".txt"
+3. El programa recibe archivos de entrada y salida, el tipo de formato es ".txt" LISTO, PERO EN FORMATO JSON.
 
 4.Hacer una tabla hash que sea generica
 
@@ -37,5 +36,4 @@ a discreción del estudiante cómo se configura).
 - Todas las estructuras deben estar sincronizadas al insertar o eliminar pacientes.
 - El sistema debe ser modular, limpio, ejecutable por consola y entregar un
 ejecutable.
-- El sistema debe manejar múltiples ejecuciones: cargar estructuras, procesar archivo,
-mostrar resultados, guardar estado.
+- El sistema debe manejar múltiples ejecuciones: cargar estructuras, procesar archivo, mostrar resultados, guardar estado.
