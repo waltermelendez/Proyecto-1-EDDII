@@ -31,6 +31,8 @@ Partes del proyecto fundamental:
 
 9. Dos opciones del menu, iniciar nuevo arbol o cargar arbol
 
+10. Hacer una funcion para importar y exportar el arbol asi como de exportar la tabla hash.
+
     #Requisitos técnicos:
 
  El árbol B+ debe implementarse desde cero y debe ser de grado configurable (queda
