@@ -20,14 +20,14 @@ public class ArbolesBPlus {
         nuevo.insertar(a);
         nuevo.insertar(z);
         nuevo.imprimirEnOrden();
-        nuevo.saveToFile("Myson.json");
-        BPlusTree dos = new BPlusTree(3);
-        try {
-            dos= dos.loadFromFile("C:\\Users\\walte\\Documents\\NetBeansProjects\\SprigbootProyects\\ArbolesBPlusWithObjectT\\Myson.json");
-        } catch (IOException e) {
-        }
-        System.out.println("Dos:");
-        dos.imprimirEnOrden();
+      //  nuevo.saveToFile("Myson.json");
+//        BPlusTree dos = new BPlusTree(3);
+//        try {
+//            dos= dos.loadFromFile("C:\\Users\\walte\\Documents\\NetBeansProjects\\SprigbootProyects\\ArbolesBPlusWithObjectT\\Myson.json");
+//        } catch (IOException e) {
+//        }
+//        System.out.println("Dos:");
+//        dos.imprimirEnOrden();
         
         
        

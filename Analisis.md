@@ -7,9 +7,9 @@ Partes del proyecto fundamental:
 
 2. Hacer un moticulo en donde se aguardara su prioridad, este debe de ser un "Heap maximo". Posible solucion, hacer el heap de tipo obejto que contenga tanto el ID como la edad del paciente LISTO
 
-3. El programa recibe archivos de entrada y salida, el tipo de formato es ".txt" LISTO, PERO EN FORMATO JSON.
+3. El programa recibe archivos de entrada y salida, el tipo de formato es ".txt" 
 
-4.Hacer una tabla hash que sea generica
+4.Hacer una tabla hash que sea genérica, con su función hash y que se pueda buscar el objeto. LISTO.
 
    # Cosas para agregar:
 
@@ -23,7 +23,7 @@ Partes del proyecto fundamental:
 
 5. si no se encuentra el paciente, mostrar un mensaje.
 
-6. Después de encontrar al paciente, se agrega al montículo y se atendera al de mayor prioridad
+6. Después de encontrar al paciente, se agrega al montículo y se atenderá al de mayor prioridad
 
 7. La salida se debe de preguntar si el usuario quiere procesar otro archivo o salir, si desa salir, se guarda toda la información del árbol B+ en un archivo fácil de leer. Al iniciar el programa se debe de cargar directamente en memoria.
 
