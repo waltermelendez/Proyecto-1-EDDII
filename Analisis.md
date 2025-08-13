@@ -27,6 +27,10 @@ Partes del proyecto fundamental:
 
 7. La salida se debe de preguntar si el usuario quiere procesar otro archivo o salir, si desa salir, se guarda toda la información del árbol B+ en un archivo fácil de leer. Al iniciar el programa se debe de cargar directamente en memoria.
 
+8. El archivo debe de guardar tanto el arbol como la tabla, su grado del arbol.
+
+9. Dos opciones del menu, iniciar nuevo arbol o cargar arbol
+
     #Requisitos técnicos:
 
  El árbol B+ debe implementarse desde cero y debe ser de grado configurable (queda

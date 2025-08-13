@@ -40,27 +40,19 @@ public class Paciente implements Comparable<Paciente> {
         return Integer.compare(this.ID, o.ID);
     }
 
-    private  String tochain() {
-       
-        String First = this.Primer_nombre.substring(1, this.Primer_nombre.length() - 2);
-        String Second = this.Primer_apellido.substring(1, this.Primer_nombre.length() - 3);
-        String Third = this.Correo_electronico.substring(2, this.Correo_electronico.length() - 2);
-        return First.concat(Second).concat(Third);
-    }
-
-    
     public long hashString() {
-        int hash=0;
-        int id=this.ID/this.Prioridad;
-        int P_Nombre= this.Primer_nombre.length();
-        int S_Apellido =this.Segundo_apellido.length();
-        int fecha =Integer.parseInt(this.Fecha_nacimiento.substring(5, this.Fecha_nacimiento.length()));
-        String Chain = tochain();
-        for (int i = 0; i < Chain.length(); i++) {
-            char k= Chain.charAt(i);
-            hash= (id *P_Nombre)*((int)k )+hash;
+        String First = this.Primer_nombre.substring(1, this.Primer_nombre.length() - 2);
+        String First_A = this.Primer_apellido.substring(1,this.Primer_apellido.length()-1);
+        String Second_N = this.Segundo_apellido.substring(1, this.Segundo_apellido.length()-1);
+        String cadena = First.concat(First_A);
+        cadena = cadena.concat(Second_N);
+        long hash=0;
+        int primo=37;
+        for (int i = 0; i < cadena.length(); i++) {
+            char k= cadena.charAt(i);
+           hash= (this.Primer_nombre.length()*this.Primer_apellido.length()-this.Segundo_apellido.length())*((int)k )+hash;
         }
-        return ((hash*S_Apellido)+(fecha*id))+P_Nombre;
+        return hash*(this.Primer_apellido.length()*this.Segundo_apellido.length())*primo+this.Primer_nombre.length();
     }
 
 }
