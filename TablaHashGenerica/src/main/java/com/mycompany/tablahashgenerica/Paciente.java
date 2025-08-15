@@ -40,7 +40,7 @@ public class Paciente implements Comparable<Paciente> {
         return Integer.compare(this.ID, o.ID);
     }
 
-    public long hashString() {
+    public long Tohash() {
         String First = this.Primer_nombre.substring(1, this.Primer_nombre.length() - 2);
         String First_A = this.Primer_apellido.substring(1,this.Primer_apellido.length()-1);
         String Second_N = this.Segundo_apellido.substring(1, this.Segundo_apellido.length()-1);
