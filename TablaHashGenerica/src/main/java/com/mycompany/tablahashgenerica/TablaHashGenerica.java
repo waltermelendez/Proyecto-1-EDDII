@@ -46,15 +46,12 @@ public class TablaHashGenerica {
         }
 
         Paciente Aa = new Paciente(7546, 4, "Franco", "Ramon", "Hernandez", "Alvizurez", "24/2/2010", "f@5566");
-        ArrayList<Long> ww = new ArrayList<>();
-        ww.add(n.Tohash());
-        ww.add(a.Tohash());
-        ww.add(z.Tohash());
-        ww.add(Aa.Tohash());
-        for (int i = 0; i < ww.size(); i++) {
-            System.out.println(ww.get(i).toString());
-        }
         
-
+        TablaHASH uno = new TablaHASH(10);
+        uno.Add(a.Tohash());
+        uno.Add(n.Tohash());
+        uno.Add(z.Tohash());
+        long p = a.Tohash()%10;
+        System.out.println(p +" "+a.Tohash());
     }
 }

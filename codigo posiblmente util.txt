@@ -1,0 +1,23 @@
+for (int i = 0; i < tabla.length; i++) {
+            if (tabla[i] == 0) {
+                tabla[i] = hash;
+                add = true;
+                break;
+            }//else if(tabla[i]==hash){
+//                int posicion = i*
+//            }
+        }
+
+
+--------------------------------------------------------
+
+ posicion = posicion + 1;
+            if (posicion > largo) {
+                for (int i = 0; i < largo; i++) {
+
+                }
+            } else {
+                tabla[posicion] = hash;
+                add = true;
+                porcentaje--;
+            }
