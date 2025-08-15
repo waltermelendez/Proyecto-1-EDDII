@@ -51,7 +51,8 @@ public class TablaHashGenerica {
         uno.Add(a.Tohash());
         uno.Add(n.Tohash());
         uno.Add(z.Tohash());
-        long p = a.Tohash()%10;
-        System.out.println(p +" "+a.Tohash());
+        uno.Add(Aa.Tohash());
+        uno.print();
+        System.out.println(uno.SearchName(F, H, A));
     }
 }
