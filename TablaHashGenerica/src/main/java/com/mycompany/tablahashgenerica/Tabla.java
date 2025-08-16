@@ -7,40 +7,39 @@ package com.mycompany.tablahashgenerica;
 /**
  *
  * @author walte
- * @param <T>
  */
-public class TablaHASH<T>  {
+public class Tabla {
 
-    private long[] tabla;
+    private HashPaciente[] tabla;
     private int largo;
     private int porcentaje;
     private final int[] iguales;
 
-    public TablaHASH(int largo) {
+    public Tabla(int largo) {
+        this.tabla = new HashPaciente[largo];
         this.largo = largo;
-        this.tabla = new long[largo];
         this.porcentaje = largo;
         this.iguales = new int[largo];
         for (int i = 0; i < tabla.length; i++) {
-            tabla[i] = 0;
+            tabla[i] = null;
         }
         for (int i = 0; i < iguales.length; i++) {
             iguales[i] = -1;
         }
     }
 
-    public void Add(long hash) {
+    public void Add(HashPaciente hash) {
         //Poner valores a reciver el primer nombre el primer apellido y el segundo apellido
         boolean add = false;
-        int posicion = (int) (hash % this.largo);
-        if (tabla[posicion] == 0) {
+        int posicion = (int) (hash.getHash() % this.largo);
+        if (tabla[posicion] == null) {
             tabla[posicion] = hash;
             add = true;
             porcentaje--;
         } else if (tabla[posicion] == hash) {
             int j = 1;
             for (int i = posicion + (j * j); i < largo; i++) {
-                if (tabla[i] == 0) {
+                if (tabla[i] == null) {
                     tabla[posicion + (i * i)] = hash;
                     add = true;
                     porcentaje--;
@@ -53,7 +52,7 @@ public class TablaHASH<T>  {
             }
             if (!add) {
                 for (int i = 0; i < largo; i++) {
-                    if (tabla[i] == 0) {
+                    if (tabla[i] == null) {
                         tabla[i] = hash;
                         add = true;
                         porcentaje--;
@@ -66,16 +65,16 @@ public class TablaHASH<T>  {
         }
 
         if (!add || porcentaje < (largo / 3)) {
-            long[] auxiliar = new long[largo * 2];
+            HashPaciente[] auxiliar = new HashPaciente[largo * 2];
             auxiliar = resize(this.largo, tabla);
-            tabla = new long[this.largo * 2];
+            tabla = new HashPaciente[this.largo * 2];
             this.tabla = auxiliar;
         }
     }
 
-    private long[] resize(int largo, long[] tabla) {
+    private HashPaciente[] resize(int largo, HashPaciente[] tabla) {
         int nuevoL = largo * 2;
-        long[] nuevaT = new long[nuevoL];
+        HashPaciente[] nuevaT = new HashPaciente[nuevoL];
         for (int i = 0; i < tabla.length; i++) {
             nuevaT[i] = tabla[i];
         }
@@ -89,19 +88,19 @@ public class TablaHASH<T>  {
 
     public void print() {
         for (int i = 0; i < largo; i++) {
-            System.out.println(tabla[i]);
+            if (tabla[i]!=null) {
+                System.out.println(tabla[i].getHash() + " " + tabla[i].toString());
+            }
         }
     }
 
-    public boolean delete(long hash) {
-        //Poner valores a reciver el primer nombre el primer apellido y el segundo apellido
-        for (int i = 0; i < largo; i++) {
-            if (tabla[i] == hash) {
-               tabla[i]=0;
-               return true;
+    private void SaveEquals(int i) {
+        for (int j = 0; j < iguales.length; j++) {
+            if (iguales[j] == -1) {
+                iguales[j] = i;
+                break;
             }
         }
-        return false;
     }
 
     public boolean SearchName(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
@@ -118,22 +117,37 @@ public class TablaHASH<T>  {
         }
         hash = hash * (Primer_apellido.length() * Segundo_apellido.length()) * primo + Primer_nombre.length();
         for (int i = 0; i < largo; i++) {
-            if (hash == tabla[i]) {
+            if (hash == tabla[i].getHash()) {
                 return true;
             }
         }
         return false;
     }
 
-    private void SaveEquals(int i) {
-        for (int j = 0; j < iguales.length; j++) {
-            if (iguales[j] == -1) {
-                iguales[j] = i;
-                break;
+    public boolean delete(HashPaciente hash) {
+        //Poner valores a reciver el primer nombre el primer apellido y el segundo apellido
+        for (int i = 0; i < largo; i++) {
+            if (tabla[i] == hash) {
+               tabla[i]=null;
+               return true;
             }
         }
+        return false;
     }
     
- 
-
+    
+    public long Tohash(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
+        String First = Primer_nombre.substring(1, Primer_nombre.length() - 2);
+        String First_A = Primer_apellido.substring(1,Primer_apellido.length()-1);
+        String Second_N = Segundo_apellido.substring(1, Segundo_apellido.length()-1);
+        String cadena = First.concat(First_A);
+        cadena = cadena.concat(Second_N);
+        long hash=0;
+        int primo=37;
+        for (int i = 0; i < cadena.length(); i++) {
+            char k= cadena.charAt(i);
+           hash= (Primer_nombre.length()*Primer_apellido.length()-Segundo_apellido.length())*((int)k )+hash;
+        }
+        return hash*(Primer_apellido.length()*Segundo_apellido.length())*primo+Primer_nombre.length();
+    }
 }
