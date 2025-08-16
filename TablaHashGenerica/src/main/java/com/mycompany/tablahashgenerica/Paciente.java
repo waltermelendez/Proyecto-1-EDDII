@@ -55,4 +55,38 @@ public class Paciente implements Comparable<Paciente> {
         return hash*(this.Primer_apellido.length()*this.Segundo_apellido.length())*primo+this.Primer_nombre.length();
     }
 
+    public int getID() {
+        return ID;
+    }
+
+    public int getPrioridad() {
+        return Prioridad;
+    }
+
+    public String getPrimer_nombre() {
+        return Primer_nombre;
+    }
+
+    public String getSegundo_nombre() {
+        return Segundo_nombre;
+    }
+
+    public String getPrimer_apellido() {
+        return Primer_apellido;
+    }
+
+    public String getSegundo_apellido() {
+        return Segundo_apellido;
+    }
+
+    public String getFecha_nacimiento() {
+        return Fecha_nacimiento;
+    }
+
+    public String getCorreo_electronico() {
+        return Correo_electronico;
+    }
+
+    
+    
 }

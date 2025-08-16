@@ -45,7 +45,7 @@ public class TablaHashGenerica {
             }
         }
 
-        Paciente Aa = new Paciente(7546, 4, "Franco", "Ramon", "Hernandez", "Alvizurez", "24/2/2010", "f@5566");
+        Paciente Aa = new Paciente(7546, 4, "Franco", "Daniel", "Hernandez", "Alvizurez", "24/2/2010", "f@5566");
 
         TablaHASH uno = new TablaHASH(10);
         uno.Add(a.Tohash());
@@ -56,16 +56,15 @@ public class TablaHashGenerica {
         System.out.println(uno.SearchName(F, H, A));
 
         //-------------------------------------------------------
-        Tabla dos = new Tabla(10);
-        HashPaciente one = new HashPaciente(n, n.Tohash());
-        HashPaciente two = new HashPaciente(a, a.Tohash());
-        HashPaciente three = new HashPaciente(z, z.Tohash());
-        dos.Add(one);
-        dos.Add(three);
-        dos.Add(two);
+        Tabla dos = new Tabla(5);
+        System.out.println("Division: "+5/1.5);
+        dos.Add(n);
+        dos.Add(a);
+        dos.Add(z);
+        dos.Add(Aa);
         
         System.out.println(dos.SearchName(F, H, A));
-        
+        System.out.println(dos.size());
         dos.print();
     }
 }

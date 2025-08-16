@@ -21,3 +21,17 @@ for (int i = 0; i < tabla.length; i++) {
                 add = true;
                 porcentaje--;
             }
+
+
+
+if (!add) {
+                for (int i = 0; i < largo; i++) {
+                    if (tabla[i] == null) {
+                        tabla[i] = nuevo;
+                        add = true;
+                        porcentaje--;
+                        
+                        break;
+                    }
+                }
+            }

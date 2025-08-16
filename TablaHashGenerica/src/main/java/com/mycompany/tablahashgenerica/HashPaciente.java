@@ -26,6 +26,14 @@ public class HashPaciente {
     public String toString() {
         return "HashPaciente{" + "paciente=" + paciente + '}';
     }
+
+    public void setHash(long hash) {
+        this.hash = hash;
+    }
+
+    public Paciente getPaciente() {
+        return paciente;
+    }
     
     
 

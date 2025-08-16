@@ -28,46 +28,39 @@ public class Tabla {
         }
     }
 
-    public void Add(HashPaciente hash) {
-        //Poner valores a reciver el primer nombre el primer apellido y el segundo apellido
+    public void Add(Paciente hash) {
         boolean add = false;
-        int posicion = (int) (hash.getHash() % this.largo);
+        int posicion = (int) (Tohash(hash) % this.largo);
+        HashPaciente nuevo = new HashPaciente(hash, Tohash(hash));
         if (tabla[posicion] == null) {
-            tabla[posicion] = hash;
+            tabla[posicion] = nuevo;
             add = true;
             porcentaje--;
-        } else if (tabla[posicion] == hash) {
-            int j = 1;
-            for (int i = posicion + (j * j); i < largo; i++) {
-                if (tabla[i] == null) {
-                    tabla[posicion + (i * i)] = hash;
-                    add = true;
-                    porcentaje--;
-                    SaveEquals(i);
-                    SaveEquals(posicion);
-                    break;
-
-                }
-                j++;
-            }
-            if (!add) {
-                for (int i = 0; i < largo; i++) {
+        } else if (tabla[posicion].getHash() == nuevo.getHash()) {
+            if (tabla[posicion].getPaciente().getSegundo_nombre().equals(nuevo.getPaciente().getSegundo_nombre())) {
+                System.out.println("Ese paciente ya esta en la tabla.");
+            } else {
+                int j = 1;
+                for (int i = posicion + (j * j); i < largo; i++) {
                     if (tabla[i] == null) {
-                        tabla[i] = hash;
+                        tabla[posicion + (i * i)] = nuevo;
                         add = true;
                         porcentaje--;
-                        SaveEquals(i);
-                        SaveEquals(posicion);
+                        
                         break;
+
                     }
+                    j++;
                 }
+
             }
+            
         }
 
-        if (!add || porcentaje < (largo / 3)) {
+        if (!add || porcentaje < (largo / 2)) {
             HashPaciente[] auxiliar = new HashPaciente[largo * 2];
             auxiliar = resize(this.largo, tabla);
-            tabla = new HashPaciente[this.largo * 2];
+            tabla = new HashPaciente[this.largo];
             this.tabla = auxiliar;
         }
     }
@@ -82,28 +75,19 @@ public class Tabla {
         return nuevaT;
     }
 
-    public int size() {
-        return this.largo;
+    public String size() {
+        return "El tamaño de la tabla es de: "+this.largo;
     }
 
     public void print() {
         for (int i = 0; i < largo; i++) {
-            if (tabla[i]!=null) {
+            if (tabla[i] != null) {
                 System.out.println(tabla[i].getHash() + " " + tabla[i].toString());
             }
         }
     }
 
-    private void SaveEquals(int i) {
-        for (int j = 0; j < iguales.length; j++) {
-            if (iguales[j] == -1) {
-                iguales[j] = i;
-                break;
-            }
-        }
-    }
-
-    public boolean SearchName(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
+    public int SearchName(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
         String First = Primer_nombre.substring(1, Primer_nombre.length() - 2);
         String First_A = Primer_apellido.substring(1, Primer_apellido.length() - 1);
         String Second_N = Segundo_apellido.substring(1, Segundo_apellido.length() - 1);
@@ -118,36 +102,40 @@ public class Tabla {
         hash = hash * (Primer_apellido.length() * Segundo_apellido.length()) * primo + Primer_nombre.length();
         for (int i = 0; i < largo; i++) {
             if (hash == tabla[i].getHash()) {
-                return true;
+                return i;
             }
         }
-        return false;
+        return -1;
     }
 
-    public boolean delete(HashPaciente hash) {
-        //Poner valores a reciver el primer nombre el primer apellido y el segundo apellido
-        for (int i = 0; i < largo; i++) {
-            if (tabla[i] == hash) {
-               tabla[i]=null;
-               return true;
-            }
+    public Paciente delete(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
+
+        int confirm = SearchName(Primer_nombre, Primer_apellido, Segundo_apellido);
+        if (confirm >= 0) {
+            Paciente nuevo = tabla[confirm].getPaciente();
+
+            tabla[confirm] = null;
+            return nuevo;
         }
-        return false;
+        return null;
+
     }
-    
-    
-    public long Tohash(String Primer_nombre, String Primer_apellido, String Segundo_apellido) {
-        String First = Primer_nombre.substring(1, Primer_nombre.length() - 2);
-        String First_A = Primer_apellido.substring(1,Primer_apellido.length()-1);
-        String Second_N = Segundo_apellido.substring(1, Segundo_apellido.length()-1);
+
+    private long Tohash(Paciente paciente) {
+        String First = paciente.getPrimer_nombre().substring(1, paciente.getPrimer_nombre().length() - 2);
+        String First_A = paciente.getPrimer_apellido().substring(1, paciente.getPrimer_apellido().length() - 1);
+        String Second_N = paciente.getSegundo_apellido().substring(1, paciente.getSegundo_apellido().length() - 1);
         String cadena = First.concat(First_A);
         cadena = cadena.concat(Second_N);
-        long hash=0;
-        int primo=37;
+        long hash = 0;
+        int primo = 37;
         for (int i = 0; i < cadena.length(); i++) {
-            char k= cadena.charAt(i);
-           hash= (Primer_nombre.length()*Primer_apellido.length()-Segundo_apellido.length())*((int)k )+hash;
+            char k = cadena.charAt(i);
+            hash = (paciente.getPrimer_nombre().length() * paciente.getPrimer_apellido().length() - paciente.getSegundo_apellido().length()) * ((int) k) + hash;
         }
-        return hash*(Primer_apellido.length()*Segundo_apellido.length())*primo+Primer_nombre.length();
+        return hash * (paciente.getPrimer_apellido().length() * paciente.getSegundo_apellido().length()) * primo + paciente.getPrimer_nombre().length();
     }
+
+   
+
 }
