@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,30 +19,63 @@ import javax.swing.JOptionPane;
  * @author walte
  */
 public class TXT {
+
     private File f;
 
     public TXT(File f) {
         this.f = f;
     }
-    
-    public void importar(String direccion){
-    File archivo = new File(direccion);
+
+    public ArrayList importar(String direccion) {
+        File archivo = new File(direccion);
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
-            
+            String[]cadena = new String[7];
+            String dato;
+            int numero = 0;
+
+            ArrayList<Paciente> list = new ArrayList<>();
+            try {
+                leer.readLine();
+                while ((dato = leer.readLine()) != null) {
+                    
+                    cadena = dato.split(",");
+                    Paciente nuevo = new Paciente();
+                    
+                    try {
+                        numero = Integer.parseInt(cadena[0].trim());
+                        nuevo.setID(numero);
+                    } catch (NumberFormatException e) {
+                        numero = 0;
+                        nuevo.setID(numero);
+                    }
+                    nuevo.setPrimer_nombre(cadena[1]);
+                    nuevo.setSegundo_nombre(cadena[2]);
+                    nuevo.setPrimer_apellido(cadena[3]);
+                    nuevo.setSegundo_nombre(cadena[4]);
+                    nuevo.setFecha_nacimiento(cadena[5]);
+                    nuevo.setCorreo_electronico(cadena[6]);
+                    list.add(nuevo);
+                }
+                leer.close();
+                return list;
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se ha podido leer el archivo");
+            }
+
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "Archivo no encontrado");
         }
-    
-    
+        return null;
     }
-    public void exportar(String direccion){
-    File archivo = new File(direccion);
+
+    public void exportar(String direccion) {
+        File archivo = new File(direccion);
         try {
-            BufferedWriter escribir= new BufferedWriter( new FileWriter(archivo));
+            BufferedWriter escribir = new BufferedWriter(new FileWriter(archivo));
             escribir.write("");
         } catch (IOException e) {
-             JOptionPane.showMessageDialog(null, "Hubo un error en la escritura");
+            JOptionPane.showMessageDialog(null, "Hubo un error en la escritura");
         }
     }
 }

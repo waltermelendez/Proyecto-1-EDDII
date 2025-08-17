@@ -57,7 +57,7 @@ public class Tabla {
             
         }
 
-        if (!add || porcentaje < (largo / 2)) {
+        if (!add || porcentaje < (largo / 1.5)) {
             HashPaciente[] auxiliar = new HashPaciente[largo * 2];
             auxiliar = resize(this.largo, tabla);
             tabla = new HashPaciente[this.largo];
