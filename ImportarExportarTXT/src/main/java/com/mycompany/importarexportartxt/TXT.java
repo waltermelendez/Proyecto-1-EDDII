@@ -30,7 +30,7 @@ public class TXT {
         File archivo = new File(direccion);
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
-            String[]cadena = new String[7];
+            String[] cadena = new String[7];
             String dato;
             int numero = 0;
 
@@ -38,10 +38,10 @@ public class TXT {
             try {
                 leer.readLine();
                 while ((dato = leer.readLine()) != null) {
-                    
+
                     cadena = dato.split(",");
                     Paciente nuevo = new Paciente();
-                    
+
                     try {
                         numero = Integer.parseInt(cadena[0].trim());
                         nuevo.setID(numero);
@@ -77,5 +77,39 @@ public class TXT {
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Hubo un error en la escritura");
         }
+    }
+
+    public ArrayList<Paciente> borrar(String direccion,ArrayList<Paciente> Pacientes) {
+        boolean delete=false;
+        File archivo = new File(direccion);
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader(archivo));
+            String[] cadena = new String[2];
+            String dato;
+            int numero = 0;
+            try {
+                leer.readLine();
+                while ((dato=leer.readLine())!=null) {
+                    cadena = dato.split(",");
+                    try {
+                        numero = Integer.parseInt(cadena[0].trim());
+                        for (Paciente Paciente : Pacientes) {
+                            if (Paciente.getID()==numero) {
+                                Pacientes.remove(Paciente);
+                                return Pacientes;
+                            }
+                        }
+                        
+                    } catch (NumberFormatException e) {
+                         JOptionPane.showMessageDialog(null, "No se encontro el ID a eliminar");
+                    }
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No es posible leer el archivo.");
+            }
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se ha encontrado el archivo.");
+        }
+        return null;
     }
 }
