@@ -26,10 +26,12 @@ public class ImportarExportarTXT {
         }
         System.out.println("Metodo para borrar");
         ArrayList<Paciente> auxiliar = new ArrayList<>();
-        auxiliar.addAll(T.borrar(borrar, nueva));
+        //auxiliar.addAll(T.borrar(borrar, nueva));
         for (Paciente auxiliar1 : auxiliar) {
             System.out.println(auxiliar1.toString());
         }
+        String atender="C:\\Users\\walte\\Desktop\\atencion.txt";
+        T.atender(atender);
 
     }
 }

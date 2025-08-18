@@ -11,6 +11,7 @@ Partes del proyecto fundamental:
 
 4.Hacer una tabla hash que sea genérica, con su función hash y que se pueda buscar el objeto. LISTO.
 
+
    # Cosas para agregar:
 
 1. Cada sección será procesada de inmediato al ser leída.
@@ -43,3 +44,17 @@ a discreción del estudiante cómo se configura).
 - El sistema debe ser modular, limpio, ejecutable por consola y entregar un
 ejecutable.
 - El sistema debe manejar múltiples ejecuciones: cargar estructuras, procesar archivo, mostrar resultados, guardar estado.
+
+
+
+#Cosas faltantes:
+
+*Función para exportar la tabla como el arbol b+.
+
+*Terminar la función de atender, que es la agregar en la tabla y la de eliminar en la tabla.
+
+*Hacer una función para buscar por id ne el arbol. 
+
+*Volver genérica la tabla hash.
+
+*Juntar todo.

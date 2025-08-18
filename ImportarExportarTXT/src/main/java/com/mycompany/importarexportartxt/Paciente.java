@@ -7,8 +7,9 @@ package com.mycompany.importarexportartxt;
 /**
  *
  * @author walte
+ * @param <T>
  */
-public class Paciente implements Comparable<Paciente> {
+public class Paciente<T> implements Comparable<Paciente> {
 
     private int ID;
     private int Prioridad;
@@ -23,9 +24,9 @@ public class Paciente implements Comparable<Paciente> {
 
     }
 
-    public Paciente(int ID, int Prioridad, String Primer_nombre, String Segundo_nombre, String Primer_apellido, String Segundo_apellido, String Fecha_nacimiento, String Correo_electronico) {
+    public Paciente(int ID, String Primer_nombre, String Segundo_nombre, String Primer_apellido, String Segundo_apellido, String Fecha_nacimiento, String Correo_electronico) {
         this.ID = ID;
-        this.Prioridad = Prioridad;
+        
         this.Primer_nombre = Primer_nombre;
         this.Segundo_nombre = Segundo_nombre;
         this.Primer_apellido = Primer_apellido;
