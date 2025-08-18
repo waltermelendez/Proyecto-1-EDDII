@@ -17,7 +17,6 @@ public class ImportarExportarTXT {
         File nuevo = new File("C:\\Users\\walte\\Desktop\\crear.txt");
         String dir = "C:\\Users\\walte\\Desktop\\crear.txt";
         TXT T = new TXT(nuevo);
-        String borrar = "C:\\Users\\walte\\Desktop\\borrar.txt";
 
         ArrayList<Paciente> nueva = new ArrayList<>();
         nueva.addAll(T.importar(dir));

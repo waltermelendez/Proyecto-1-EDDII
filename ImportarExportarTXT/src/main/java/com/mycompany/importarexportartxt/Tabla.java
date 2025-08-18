@@ -4,19 +4,25 @@
  */
 package com.mycompany.importarexportartxt;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 /**
  *
  * @author walte
+ * @param <T>
  */
-public class Tabla {
+public class Tabla <T extends number> {
 
-    private HashPaciente[] tabla;
+    private T[] tabla;
     private int largo;
     private int porcentaje;
     private final int[] iguales;
 
     public Tabla(int largo) {
-        this.tabla = new HashPaciente[largo];
+        this.tabla = (T[]) new HashPaciente[largo];
         this.largo = largo;
         this.porcentaje = largo;
         this.iguales = new int[largo];
@@ -28,39 +34,41 @@ public class Tabla {
         }
     }
 
-    public void Add(Paciente hash) {
+    public void Add(T hash) {
         boolean add = false;
         int posicion = (int) (Tohash(hash) % this.largo);
-        HashPaciente nuevo = new HashPaciente(hash, Tohash(hash),1);
+        //T nuevo = new HashPaciente(hash, Tohash(hash),1);
+        //T nuevo = new HashPaciente()
+        //Agregar la funcion de atender.
         if (tabla[posicion] == null) {
             tabla[posicion] = nuevo;
             add = true;
             porcentaje--;
-        } else if (tabla[posicion].getHash() == nuevo.getHash()) {
-            if (tabla[posicion].getPaciente().getSegundo_nombre().equals(nuevo.getPaciente().getSegundo_nombre())) {
-                System.out.println("Ese paciente ya esta en la tabla.");
-            } else {
-                int j = 1;
-                for (int i = posicion + (j * j); i < largo; i++) {
-                    if (tabla[i] == null) {
-                        tabla[posicion + (i * i)] = nuevo;
-                        add = true;
-                        porcentaje--;
-                        
-                        break;
-
-                    }
-                    j++;
-                }
-
-            }
+        } else if (tabla[posicion].getLong() == nuevo.getHash()) {
+//            if (tabla[posicion].getPaciente().getSegundo_nombre().equals(nuevo.getPaciente().getSegundo_nombre())) {
+//                System.out.println("Ese paciente ya esta en la tabla.");
+//            } else {
+//                int j = 1;
+//                for (int i = posicion + (j * j); i < largo; i++) {
+//                    if (tabla[i] == null) {
+//                        tabla[posicion + (i * i)] = nuevo;
+//                        add = true;
+//                        porcentaje--;
+//                        
+//                        break;
+//
+//                    }
+//                    j++;
+//                }
+//
+//            }
             
         }
 
         if (!add || porcentaje < (largo / 1.5)) {
-            HashPaciente[] auxiliar = new HashPaciente[largo * 2];
-            auxiliar = resize(this.largo, tabla);
-            tabla = new HashPaciente[this.largo];
+            T[] auxiliar = (T[]) new HashPaciente[largo * 2];
+            auxiliar = (T[]) resize(this.largo, (HashPaciente[]) tabla);
+            tabla = (T[]) new HashPaciente[this.largo];
             this.tabla = auxiliar;
         }
     }
@@ -82,7 +90,7 @@ public class Tabla {
     public void print() {
         for (int i = 0; i < largo; i++) {
             if (tabla[i] != null) {
-                System.out.println(tabla[i].getHash() + " " + tabla[i].toString());
+                System.out.println(tabla[i].toString());
             }
         }
     }
@@ -101,29 +109,31 @@ public class Tabla {
         }
         hash = hash * (Primer_apellido.length() * Primer_apellido.length()) * primo + Primer_nombre.length();
         for (int i = 0; i < largo; i++) {
-            if (hash == tabla[i].getHash()) {
+            if (hash == tabla[i].getLong()) {
                 return i;
             }
         }
         return -1;
     }
 
-    public Paciente delete(String Primer_nombre, String Primer_apellido) {
+    public void delete(String Primer_nombre, String Primer_apellido) {
 
         int confirm = SearchName(Primer_nombre, Primer_apellido);
         if (confirm >= 0) {
-            Paciente nuevo = tabla[confirm].getPaciente();
+            System.out.println(tabla[confirm].toString());
 
             tabla[confirm] = null;
-            return nuevo;
+            
+        }else {
+            System.out.println("No se ha encontrado el paciente");
         }
-        return null;
+        
 
     }
 
-    private long Tohash(Paciente paciente) {
-        String First = paciente.getPrimer_nombre().substring(1, paciente.getPrimer_nombre().length() - 2);
-        String First_A = paciente.getPrimer_apellido().substring(1, paciente.getPrimer_apellido().length() - 1);
+    private long Tohash(T paciente) {
+        String First = paciente.getString1().substring(1, paciente.getString1().length() - 2);
+        String First_A = paciente.getString2().substring(1, paciente.getString2().length() - 1);
         
         String cadena = First.concat(First_A);
         
@@ -131,11 +141,22 @@ public class Tabla {
         int primo = 37;
         for (int i = 0; i < cadena.length(); i++) {
             char k = cadena.charAt(i);
-            hash = (paciente.getPrimer_nombre().length() * paciente.getPrimer_apellido().length() - paciente.getPrimer_nombre().length()) * ((int) k) + hash;
+            hash = (paciente.getString1().length() * paciente.getString2().length() - paciente.getString1().length()) * ((int) k) + hash;
         }
-        return hash * (paciente.getPrimer_apellido().length() * paciente.getPrimer_apellido().length()) * primo + paciente.getPrimer_nombre().length();
+        return hash * (paciente.getString2().length() * paciente.getString2().length()) * primo + paciente.getString1().length();
     }
 
    
+    public void ExportarTabla(T Tabla) {
+        File export = new File("C:\\Users\\walte");
+        try {
+            BufferedWriter write = new BufferedWriter(new FileWriter(export));
+            String dato ="";
+            
+        } catch (IOException e) {
+        }
+    }
+    
+    public void ImportarTabla(){}
 
 }

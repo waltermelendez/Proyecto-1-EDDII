@@ -9,7 +9,7 @@ package com.mycompany.importarexportartxt;
  * @author walte
  * @param <T>
  */
-public class Paciente<T> implements Comparable<Paciente> {
+public class Paciente<T> implements number {
 
     private int ID;
     private int Prioridad;
@@ -40,10 +40,10 @@ public class Paciente<T> implements Comparable<Paciente> {
         return "Paciente{" + "ID=" + ID + ", Prioridad=" + Prioridad + ", Primer_nombre=" + Primer_nombre + ", Segundo_nombre=" + Segundo_nombre + ", Primer_apellido=" + Primer_apellido + ", Segundo_apellido=" + Segundo_apellido + ", Fecha_nacimiento=" + Fecha_nacimiento + ", Correo_electronico=" + Correo_electronico + '}';
     }
 
-    @Override
-    public int compareTo(Paciente o) {
-        return Integer.compare(this.ID, o.ID);
-    }
+//    @Override
+//    public int compareTo(Paciente o) {
+//        return Integer.compare(this.ID, o.ID);
+//    }
 
     public int getID() {
         return ID;
@@ -108,6 +108,28 @@ public class Paciente<T> implements Comparable<Paciente> {
     public void setCorreo_electronico(String Correo_electronico) {
         this.Correo_electronico = Correo_electronico;
     }
+
+    @Override
+    public int getNumber() {
+       return  this.ID;
+    }
+
+    @Override
+    public String getString1() {
+       return this.Primer_nombre;
+    }
+
+    @Override
+    public String getString2() {
+       return  this.Primer_apellido;
+    }
+
+    @Override
+    public long getLong() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
     
     
 

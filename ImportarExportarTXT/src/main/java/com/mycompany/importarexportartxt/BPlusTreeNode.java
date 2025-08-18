@@ -12,7 +12,7 @@ import java.util.List;
  * @param <T>
  */
 //Se agregaron nodos para poder convertir un arbol B a uno B+
-public class BPlusTreeNode <T extends Comparable<T>>{
+public class BPlusTreeNode <T>{
 
     List<T> claves;
     List<BPlusTreeNode<T>> hijos;

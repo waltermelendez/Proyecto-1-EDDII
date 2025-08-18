@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  * @author walte
  * @param <T>
  */
-public class TXT<T> {
+public class TXT<T extends number> {
 
     private File f;
 
@@ -29,7 +29,7 @@ public class TXT<T> {
     }
 
     //Esta funcion es para el arbol b+
-    public <T> ArrayList<T> importar(String direccion) {
+    public  ArrayList<T> importar(String direccion) {
         File archivo = new File(direccion);
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
@@ -66,19 +66,11 @@ public class TXT<T> {
         return null;
     }
 
-    //Funcion para el arbol
-    public void exportar(String direccion) {
-        File archivo = new File(direccion);
-        try {
-            BufferedWriter escribir = new BufferedWriter(new FileWriter(archivo));
-            escribir.write("");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Hubo un error en la escritura");
-        }
-    }
+   
+    
 
-    //Funcion para el arbol
-    public ArrayList<T> borrar(String direccion, ArrayList<T> lista) {
+    //Funcion para el arbol, no debe de devolver nada, fusionar con la funcion de borrar del arbol
+    public  ArrayList<T> borrar(String direccion, ArrayList<T> lista) {
 
         File archivo = new File(direccion);
         try {
@@ -93,8 +85,9 @@ public class TXT<T> {
                     try {
                         numero = Integer.parseInt(cadena[0].trim());
                         for (T paciente : lista) {
-                            if (paciente.equals(numero)) {
-                                
+                            if (paciente.getNumber() == numero) {
+                                lista.remove(paciente);
+                                return lista;
                             }
                         }
 
@@ -142,15 +135,20 @@ public class TXT<T> {
                             //Hacer la funcion buscar id para el arbol b+
                         }
                         case "NOMBRES:" -> {
+                            
                         }
                         default -> {
+                            JOptionPane.showMessageDialog(null, "Dato del paciente no reconocido");
                         }
                     }
                 }
+                leer.close();
             } catch (IOException e) {
+                JOptionPane.showMessageDialog(null, "No se puede leer el archivo.");
             }
 
         } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "No se encontro el archivo a leer.");
         }
     }
 
@@ -169,7 +167,5 @@ public class TXT<T> {
         return hash * (paciente.getPrimer_apellido().length() * paciente.getPrimer_apellido().length()) * primo + paciente.getPrimer_nombre().length();
     }
 
-    public void ExportarTabla() {
-    }
 
 }

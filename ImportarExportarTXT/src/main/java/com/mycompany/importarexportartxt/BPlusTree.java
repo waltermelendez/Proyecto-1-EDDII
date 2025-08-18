@@ -5,17 +5,15 @@
 package com.mycompany.importarexportartxt;
 
 import java.util.ArrayList;
-//import java.util.HashMap;
+import java.util.HashMap;
 import java.util.List;
-//import java.util.Map;
-
+import java.util.Map;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
-
 
 /**
  *
@@ -164,16 +162,8 @@ public class BPlusTree<T extends Comparable<T>> {
 
         System.out.println();
     }
+
+    public void ImportarArbol(){}
     
-//    private T SearchPaciente(){
-//    
-//    }
-   
-    
-  
+    public void ExportarArbol(){}
 }
-
-
-
-
-
