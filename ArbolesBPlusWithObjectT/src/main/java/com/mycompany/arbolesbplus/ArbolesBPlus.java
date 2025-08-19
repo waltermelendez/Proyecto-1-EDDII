@@ -3,8 +3,6 @@
  */
 package com.mycompany.arbolesbplus;
 
-import java.io.IOException;
-
 /**
  *
  * @author walte

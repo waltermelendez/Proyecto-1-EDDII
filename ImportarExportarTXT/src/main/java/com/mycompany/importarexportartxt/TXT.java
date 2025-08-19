@@ -29,42 +29,7 @@ public class TXT<T extends number> {
     }
 
     //Esta funcion es para el arbol b+
-    public  ArrayList<T> importar(String direccion) {
-        File archivo = new File(direccion);
-        try {
-            BufferedReader leer = new BufferedReader(new FileReader(archivo));
-            String[] cadena = new String[7];
-            String dato;
-            int numero = 0;
-
-            ArrayList<T> list = new ArrayList<>();
-            try {
-                leer.readLine();
-                while ((dato = leer.readLine()) != null) {
-
-                    cadena = dato.split(",");
-
-                    try {
-                        numero = Integer.parseInt(cadena[0].trim());
-                        T nuevo = (T) new Paciente(numero, cadena[1], cadena[2], cadena[3], cadena[4], cadena[5], cadena[6]);
-                        list.add(nuevo);
-                    } catch (NumberFormatException e) {
-                        JOptionPane.showMessageDialog(null, "No Ho hay suficiente informacion de este paciente");
-
-                    }
-
-                }
-                leer.close();
-                return list;
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, "No se ha podido leer el archivo");
-            }
-
-        } catch (FileNotFoundException e) {
-            JOptionPane.showMessageDialog(null, "Archivo no encontrado");
-        }
-        return null;
-    }
+    
 
    
     
@@ -105,7 +70,7 @@ public class TXT<T extends number> {
 
     }
 
-    //Funcion para la tabla
+    //Funcion para la tabla, agregar a la tabla
     public ArrayList<T> atender(String dir) {
         File archivo = new File(dir);
         try {

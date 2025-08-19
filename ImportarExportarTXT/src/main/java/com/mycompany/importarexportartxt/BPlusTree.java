@@ -4,6 +4,11 @@
  */
 package com.mycompany.importarexportartxt;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,6 +19,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -171,19 +177,80 @@ public class BPlusTree<T extends Comparable<T> & number> {
             while (i < nodo.claves.size() && ID >= nodo.claves.get(i).getNumber()) {
                 i++;
             }
-            nodo=nodo.hijos.get(i);
+            nodo = nodo.hijos.get(i);
         }
         for (T Nodo : nodo.claves) {
-            if (Nodo.getNumber()==ID) {
+            if (Nodo.getNumber() == ID) {
                 return Nodo;
             }
         }
         return null;
     }
 
-    public void ImportarArbol() {
+    public void ExportarAbol(String dir) {
+        File escribir = new File(dir);
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(escribir));
+            writer.write("* Orden=" + this.d);
+            writer.newLine();
+            Queue<BPlusTreeNode<T>> cola = new LinkedList<>();
+            while (!cola.isEmpty()) {
+                BPlusTreeNode<T> nodo = cola.poll();
+                writer.write("* Nodo Hoja=" + nodo.esHoja + nodo.claves.size());
+                writer.newLine();
+                
+                for (T clave : nodo.claves) {
+                    writer.write(clave.toString());
+                    writer.newLine();
+                }
+                if (!nodo.esHoja) {
+                    cola.addAll(nodo.hijos);
+                }
+            }
+        } catch (IOException e) {
+        }
+    }
+    
+    public  void importar(String direccion) {
+        File archivo = new File(direccion);
+        try {
+            BufferedReader leer = new BufferedReader(new FileReader(archivo));
+            String[] cadena = new String[7];
+            String dato;
+            int numero = 0;
+
+            ArrayList<T> list = new ArrayList<>();
+            try {
+                leer.readLine();
+                while ((dato = leer.readLine()) != null) {
+
+                    cadena = dato.split(",");
+
+                    try {
+                        numero = Integer.parseInt(cadena[0].trim());
+                        T nuevo = (T) new Paciente(numero, cadena[1], cadena[2], cadena[3], cadena[4], cadena[5], cadena[6]);
+                        list.add(nuevo);
+                    } catch (NumberFormatException e) {
+                        JOptionPane.showMessageDialog(null, "No Ho hay suficiente informacion de este paciente");
+
+                    }
+
+                }
+                leer.close();
+//                for (int i = 0; i < list.size(); i++) {
+//                    insertar(list.remove(i));
+//                }
+                for (T list1 : list) {
+                    insertar(list1);
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "No se ha podido leer el archivo");
+            }
+
+        } catch (FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Archivo no encontrado");
+        }
+       
     }
 
-    public void ExportarArbol() {
-    }
 }
