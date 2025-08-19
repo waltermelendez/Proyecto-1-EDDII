@@ -106,13 +106,14 @@ public class TXT<T extends number> {
     }
 
     //Funcion para la tabla
-    public void atender(String dir) {
+    public ArrayList<T> atender(String dir) {
         File archivo = new File(dir);
         try {
             BufferedReader leer = new BufferedReader(new FileReader(archivo));
             String[] cadena = new String[6];
             String dato;
             String[] auxiliar = new String[6];
+            String[] auxiliar2 = new String[3];
             int id = 0;
             int prioridad = 0;
             ArrayList<T> hospital = new ArrayList<>();
@@ -135,7 +136,13 @@ public class TXT<T extends number> {
                             //Hacer la funcion buscar id para el arbol b+
                         }
                         case "NOMBRES:" -> {
+                            int ID;
                             
+                            auxiliar2=cadena[2].split(" ");
+                            ID = Integer.parseInt(cadena[1].trim());
+                            long hash =Tohash(auxiliar[1],cadena[1]);
+                            T nuevo = (T) new HashPaciente(auxiliar[1],cadena[1],hash,ID);
+                            hospital.add(nuevo);
                         }
                         default -> {
                             JOptionPane.showMessageDialog(null, "Dato del paciente no reconocido");
@@ -143,6 +150,7 @@ public class TXT<T extends number> {
                     }
                 }
                 leer.close();
+                return hospital;
             } catch (IOException e) {
                 JOptionPane.showMessageDialog(null, "No se puede leer el archivo.");
             }
@@ -150,11 +158,12 @@ public class TXT<T extends number> {
         } catch (FileNotFoundException e) {
             JOptionPane.showMessageDialog(null, "No se encontro el archivo a leer.");
         }
+        return null;
     }
 
-    private long Tohash(Paciente paciente) {
-        String First = paciente.getPrimer_nombre().substring(1, paciente.getPrimer_nombre().length() - 2);
-        String First_A = paciente.getPrimer_apellido().substring(1, paciente.getPrimer_apellido().length() - 1);
+    private long Tohash(String Primer_Nombre, String Primer_Apellido) {
+        String First = Primer_Nombre.substring(1, Primer_Nombre.length() - 2);
+        String First_A = Primer_Apellido.substring(1, Primer_Apellido.length() - 1);
 
         String cadena = First.concat(First_A);
 
@@ -162,9 +171,9 @@ public class TXT<T extends number> {
         int primo = 37;
         for (int i = 0; i < cadena.length(); i++) {
             char k = cadena.charAt(i);
-            hash = (paciente.getPrimer_nombre().length() * paciente.getPrimer_apellido().length() - paciente.getPrimer_nombre().length()) * ((int) k) + hash;
+            hash = (Primer_Nombre.length() * Primer_Apellido.length() - Primer_Nombre.length()) * ((int) k) + hash;
         }
-        return hash * (paciente.getPrimer_apellido().length() * paciente.getPrimer_apellido().length()) * primo + paciente.getPrimer_nombre().length();
+        return hash * (Primer_Apellido.length() * Primer_Apellido.length()) * primo + Primer_Nombre.length();
     }
 
 

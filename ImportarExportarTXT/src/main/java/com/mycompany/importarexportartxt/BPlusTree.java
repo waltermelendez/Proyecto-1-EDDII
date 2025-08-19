@@ -20,10 +20,10 @@ import java.util.*;
  * @author walte
  * @param <T>
  */
-public class BPlusTree<T extends Comparable<T>> {
+public class BPlusTree<T extends Comparable<T> & number> {
 
     private BPlusTreeNode<T> raiz;
-    private final int d;
+    private int d;
 
     public BPlusTree(int orden) {
         if (orden < 1) {
@@ -163,7 +163,27 @@ public class BPlusTree<T extends Comparable<T>> {
         System.out.println();
     }
 
-    public void ImportarArbol(){}
-    
-    public void ExportarArbol(){}
+    public T Search(int ID) {
+        BPlusTreeNode<T> nodo = raiz;
+
+        while (!nodo.esHoja) {
+            int i = 0;
+            while (i < nodo.claves.size() && ID >= nodo.claves.get(i).getNumber()) {
+                i++;
+            }
+            nodo=nodo.hijos.get(i);
+        }
+        for (T Nodo : nodo.claves) {
+            if (Nodo.getNumber()==ID) {
+                return Nodo;
+            }
+        }
+        return null;
+    }
+
+    public void ImportarArbol() {
+    }
+
+    public void ExportarArbol() {
+    }
 }

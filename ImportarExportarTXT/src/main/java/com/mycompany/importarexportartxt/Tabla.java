@@ -14,7 +14,7 @@ import java.io.IOException;
  * @author walte
  * @param <T>
  */
-public class Tabla <T extends number> {
+public class Tabla <T extends Table> {
 
     private T[] tabla;
     private int largo;
@@ -65,7 +65,7 @@ public class Tabla <T extends number> {
             
         }
 
-        if (!add || porcentaje < (largo / 1.5)) {
+        if (!add || porcentaje < (largo / 2)) {
             T[] auxiliar = (T[]) new HashPaciente[largo * 2];
             auxiliar = (T[]) resize(this.largo, (HashPaciente[]) tabla);
             tabla = (T[]) new HashPaciente[this.largo];

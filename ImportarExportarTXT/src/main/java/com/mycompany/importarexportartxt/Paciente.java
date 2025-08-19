@@ -124,10 +124,7 @@ public class Paciente<T> implements number {
        return  this.Primer_apellido;
     }
 
-    @Override
-    public long getLong() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
 
     
